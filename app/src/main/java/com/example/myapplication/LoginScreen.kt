@@ -1,19 +1,19 @@
 package com.example.myapplication
 
+import android.content.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.*
 import android.widget.*
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.*
 import java.io.*
 
-class MainActivity : AppCompatActivity() {
+class LoginScreen : AppCompatActivity() {
     val client = OkHttpClient()
-    val FORM = "application/x-www-form-urlencoded".toMediaTypeOrNull() //przyjmuje tylko rawJson
+    val FORM = "application/x-www-form-urlencoded".toMediaTypeOrNull()
 
 
 
@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
             .url(url)
             .post(body)
             .addHeader("Accept", "application/json")
-            //.addHeader("content-type", "application/json; charset=utf-8")
             .build()
         client.newCall(request).enqueue(object : Callback{
             override fun onFailure(call: Call, e: IOException) {
@@ -58,8 +57,11 @@ class MainActivity : AppCompatActivity() {
 
                 }
             else if (json.has("token")){
-               // Toast.makeText(this, json["token"] as String, Toast.LENGTH_SHORT).show()
-                Log.v("Info", "Chuj")
+
+                val i = Intent(this@LoginScreen, MainMenu::class.java)
+                startActivity(i)
+                finish()
+
             }
         },
         fun(){
@@ -69,19 +71,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login_screen)
 
+        register();
+        signIn();
+
+    }
+
+    fun signIn() {
         val btn_login = findViewById<Button>(R.id.btn_login)
-        val login_field = findViewById<EditText>(R.id.login_field)
-        val password_field = findViewById<EditText>(R.id.password_field)
+        val login_field = findViewById<EditText>(R.id.field_username)
+        val password_field = findViewById<EditText>(R.id.field_password)
         btn_login.setOnClickListener {
             val login = login_field.text.toString()
             val password = password_field.text.toString()
-            login(login, password)
+            login(login, password);
 
 
         }
+    }
 
-
+    fun register() {
+        val btn_new_user = findViewById<Button>(R.id.btn_new_user);
+btn_new_user.setOnClickListener(){
+        val i = Intent(this@LoginScreen, RegistrationScreen::class.java)
+        startActivity(i)
+    }
     }
 }
