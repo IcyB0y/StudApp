@@ -40,10 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     fun login(login: String, password: String){
         Toast.makeText(this, "Logowanie (" + login + ":" + password + ")", Toast.LENGTH_SHORT).show()
-        val url = "http://3.69.52.61:3000/login"
+        val url = "http://3.67.41.247:3000/login"
 
 
-        val body = ("session[index]=" + login + "&session[password]=" + password).toRequestBody(FORM)
+        val body = ("session[username]=" + login + "&session[password]=" + password).toRequestBody(FORM)
         print("JSON String: (String(data: responseData, encoding: .utf8))")
         httpPost(url, body,
         fun(response:Response){
@@ -58,7 +58,8 @@ class MainActivity : AppCompatActivity() {
 
                 }
             else if (json.has("token")){
-                Toast.makeText(this, json["token"] as String, Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this, json["token"] as String, Toast.LENGTH_SHORT).show()
+                Log.v("Info", "Chuj")
             }
         },
         fun(){
