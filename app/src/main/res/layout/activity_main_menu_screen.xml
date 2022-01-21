@@ -8,7 +8,7 @@
     tools:context=".MainMenu">
 
     <ImageView
-        android:id="@+id/t_pkt"
+        android:id="@+id/s_logo"
         android:layout_width="289dp"
         android:layout_height="130dp"
         android:src="@drawable/studapp"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/t_pkt" />
+        app:layout_constraintTop_toBottomOf="@+id/s_logo" />
 
     <Button
         android:id="@+id/btn_statistic"

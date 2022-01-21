@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.*
 import android.view.*
 import android.widget.*
+import com.google.gson.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.*
@@ -16,6 +17,7 @@ class StatisticScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistic_screen)
         configureBackButton()
+        getStatistic()
     }
 
 
@@ -63,26 +65,18 @@ class StatisticScreen : AppCompatActivity() {
                 Log.v("Info", "Succeeded Get Statistic")
                 val response_string = response.body?.string()
                 Log.v("INFO", response_string.toString())
+
                 val json = JSONObject(response_string)
                 if (json.has("last_score")){
+                    val s_pkt = findViewById<TextView>(R.id.s_pkt)
                     this.runOnUiThread{
-                        Toast.makeText(this, json["last_score"] as String, Toast.LENGTH_SHORT).show()
+                        val pkt = json.getInt("last_score")
+                        s_pkt.setText(pkt.toString());
+
                     }
                     Log.v("Info", "Udalo sie uzyskac punkty")
 
                 }
-
-                //               else if (json.has("id")){
-//TODO()
-                //     this.runOnUiThread{
-                //       Toast.makeText(this, json["id"] as String, Toast.LENGTH_SHORT).show()
-                //   }
-                //  Log.v("Info", "Jednak Id")
-                //             }
-                //             else{
-                //                TODO()
-                //   Log.v("Info", "Coś innego nie udalo sie")
-                //           }
             },
             fun(){
                 Log.v("Info", "Failed Get Statistic")

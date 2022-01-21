@@ -27,7 +27,7 @@ class MainMenu : AppCompatActivity() {
     fun configurePlayButton(){
         val btn_play = findViewById<Button>(R.id.btn_play)
         btn_play.setOnClickListener(){
-            TODO()
+           TODO()
         }
     }
     fun configureStatisticButton(){
