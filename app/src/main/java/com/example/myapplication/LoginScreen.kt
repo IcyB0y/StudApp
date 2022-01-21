@@ -43,7 +43,7 @@ class LoginScreen : AppCompatActivity() {
 
 
         val body = ("session[username]=" + login + "&session[password]=" + password).toRequestBody(FORM)
-        print("JSON String: (String(data: responseData, encoding: .utf8))")
+       // print("JSON String: (String(data: responseData, encoding: .utf8))")
         httpPost(url, body,
         fun(response:Response){
             Log.v("Info", "Succeeded")

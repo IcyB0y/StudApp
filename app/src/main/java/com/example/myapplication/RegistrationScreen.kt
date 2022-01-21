@@ -71,7 +71,6 @@ class RegistrationScreen : AppCompatActivity() {
         })
     }
     fun register(username: String, password: String){
-       // Toast.makeText(this, "Rejestracja (" + username + ":" + password + ")", Toast.LENGTH_SHORT).show()
         val url = "http://3.67.41.247:3000/users"
 
 

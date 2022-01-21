@@ -13,11 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".RegistrationScreen"
+            android:name=".StatisticScreen"
             android:exported="true" />
         <activity
+            android:name=".RegistrationScreen"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".StartScreen"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,10 +31,12 @@
         </activity>
         <activity
             android:name=".MainMenu"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginScreen"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
