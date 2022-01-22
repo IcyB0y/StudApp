@@ -7,13 +7,17 @@
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/drawable/button_background.xml" value="0.14814814814814814" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/drawable/logo.xml" value="0.21666666666666667" />
+        <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_field_screen.xml" value="0.23020833333333332" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_login_screen.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_main.xml" value="0.203125" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_main2.xml" value="0.1" />
+        <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_main_adapter.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_main_menu_screen.xml" value="0.22" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_registration_screen.xml" value="0.203125" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_start_screen.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/activity_statistic_screen.xml" value="0.18645833333333334" />
+        <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/field_row.xml" value="0.1890625" />
+        <entry key="..\:/Users/szymu/AndroidStudioProjects/MyApplication2/app/src/main/res/layout/row_list.xml" value="0.1890625" />
       </map>
     </option>
   </component>

@@ -27,7 +27,7 @@ class MainMenu : AppCompatActivity() {
     fun configurePlayButton(){
         val btn_play = findViewById<Button>(R.id.btn_play)
         btn_play.setOnClickListener(){
-           TODO()
+           play();
         }
     }
     fun configureStatisticButton(){
@@ -43,6 +43,10 @@ class MainMenu : AppCompatActivity() {
 
         }
 
+    }
+    fun play(){
+        val i = Intent(this@MainMenu, FieldScreen::class.java)
+        startActivity(i)
     }
     fun getStatistic(){
         val i = Intent(this@MainMenu, StatisticScreen::class.java)
