@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.*
+import android.graphics.Insets.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.*
@@ -11,12 +12,14 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.*
 import java.io.*
 
-class LoginScreen : AppCompatActivity() {
+open class LoginScreen : AppCompatActivity() {
+
     val client = OkHttpClient()
     val FORM = "application/x-www-form-urlencoded".toMediaTypeOrNull()
-
-
-
+companion object {
+    public var globaltoken = "";
+    public var globalusername = "";
+}
 
     fun httpPost(url: String, body: RequestBody, success: (response: Response)-> Unit, failure:() -> Unit){
         val request = Request.Builder()
@@ -39,7 +42,7 @@ class LoginScreen : AppCompatActivity() {
 
     fun login(login: String, password: String){
         Toast.makeText(this, "Logowanie (" + login + ":" + password + ")", Toast.LENGTH_SHORT).show()
-        val url = "http://3.67.41.247:3000/login"
+        val url = "http://18.185.157.106:3000/login"
 
 
         val body = ("session[username]=" + login + "&session[password]=" + password).toRequestBody(FORM)
@@ -58,6 +61,9 @@ class LoginScreen : AppCompatActivity() {
                 }
             else if (json.has("token")){
 
+                 globaltoken =  json["token"] as String
+                globalusername = login;
+
                 val i = Intent(this@LoginScreen, MainMenu::class.java)
                 startActivity(i)
                 finish()
@@ -68,6 +74,8 @@ class LoginScreen : AppCompatActivity() {
             Log.v("Info", "Failed")
         })
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,13 +90,14 @@ class LoginScreen : AppCompatActivity() {
         val btn_login = findViewById<Button>(R.id.btn_login)
         val login_field = findViewById<EditText>(R.id.field_username)
         val password_field = findViewById<EditText>(R.id.field_password)
+
         btn_login.setOnClickListener {
-            val login = login_field.text.toString()
+          val username = login_field.text.toString()
             val password = password_field.text.toString()
-            login(login, password);
-
-
+            Log.v("LoginScreen", username)
+            login(username, password);
         }
+
     }
 
     fun register() {

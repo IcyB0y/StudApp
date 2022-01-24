@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.*
 import android.widget.*
+import com.example.myapplication.LoginScreen.Companion.globaltoken
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.*
@@ -57,10 +58,12 @@ class MainMenu : AppCompatActivity() {
     val FORM = "application/x-www-form-urlencoded".toMediaTypeOrNull()
 
 
-    fun httpDelete(url: String,body: RequestBody, success: (response: Response)-> Unit, failure:() -> Unit){
+    fun httpDelete(url: String, success: (response: Response)-> Unit, failure:() -> Unit){
+        Log.v("Wylogowywanie", globaltoken)
         val request = Request.Builder()
             .url(url)
-            .delete(body)
+            .delete()
+            .addHeader("Authorization", "Bearer " + globaltoken)
             .addHeader("Accept", "application/json")
             .build()
         client.newCall(request).enqueue(object : Callback {
@@ -76,25 +79,38 @@ class MainMenu : AppCompatActivity() {
         })
     }
     fun logout(){
-        val url = "http://3.67.41.247:3000/logout"
+        val url = "http://18.185.157.106:3000/logout"
       //  Toast.makeText(this, "Wylogowywanie", Toast.LENGTH_SHORT).show()
-        val body = (url+"4").toRequestBody(FORM)
-        httpDelete(url,body,
+        val body = (url).toRequestBody(FORM)
+        httpDelete(url,
             fun(response:Response){
                 Log.v("Info", "Succeeded LogOut")
                 val response_string = response.body?.string()
                 Log.v("INFO", response_string.toString())
-                val json = JSONObject(response_string)
-                if (json.has("errors")){
-                    this.runOnUiThread{
-                        Toast.makeText(this, json["errors"] as String, Toast.LENGTH_SHORT).show()
+                if (response_string != null && response_string.isNotEmpty()) {
+
+                    val json = JSONObject(response_string)
+                    if (json.has("errors")){
+                        this.runOnUiThread{
+                            Toast.makeText(this@MainMenu, "Błąd podczas wylogowywania", Toast.LENGTH_SHORT).show()
+                        }
+                        Log.v("Info", "Błąd podczas wylogowywania")
+
                     }
-                    Log.v("Info", "Jednak errors")
+
 
                 }
-                else{
-                    Log.v("Info", "Coś innego")
-                }
+                else {
+                    Log.v("Info", "Wylogowano")
+                    // Miejsce na wiadomość z serwera
+                    this.runOnUiThread{
+                        Toast.makeText(this@MainMenu, "Pomyślnie wylogowano", Toast.LENGTH_SHORT).show()
+                    }
+                    val i = Intent(this@MainMenu, LoginScreen::class.java)
+                    startActivity(i)
+                    finish()
+
+               }
             },
             fun(){
                 Log.v("Info", "Failed LogOut")

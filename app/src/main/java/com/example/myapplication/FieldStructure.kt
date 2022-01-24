@@ -1,3 +1,3 @@
 package com.example.myapplication
 
-class FieldStructure (val fields: ArrayList<FieldStructureItem>)
+class FieldStructure (val fields: ArrayList<Field>)

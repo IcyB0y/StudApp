@@ -71,7 +71,7 @@ class RegistrationScreen : AppCompatActivity() {
         })
     }
     fun register(username: String, password: String){
-        val url = "http://3.67.41.247:3000/users"
+        val url = "http://18.185.157.106:3000/users"
 
 
         val body = ("user[username]=" + username + "&user[password]=" + password).toRequestBody(FORM)

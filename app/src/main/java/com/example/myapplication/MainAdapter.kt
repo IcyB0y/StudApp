@@ -1,15 +1,17 @@
 package com.example.myapplication
 
+import android.util.*
 import android.view.*
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.*
 
-class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
+class MainAdapter(private val field_list: FieldStructure): RecyclerView.Adapter<CustomViewHolder>() {
     val fieldList = listOf("kategoria1", "kategoria2")
+
     ///number OfItems
     override fun getItemCount(): Int{
-        return 2//field_list.fields.count()
+        return field_list.fields.count()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -19,9 +21,12 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-val fieldList = fieldList.get(position)
+//val fieldList = fieldList.get(position)
+val field = field_list.fields.get(position)
 
-      holder?.textView_field_title.text =fieldList
+        Log.v("1", field_list.toString())
+        Log.v("2", field.toString())
+     holder?.textView_field_title.text = field.name
 
 
 

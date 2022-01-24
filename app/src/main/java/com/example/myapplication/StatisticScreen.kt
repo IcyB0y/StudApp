@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.util.*
 import android.view.*
 import android.widget.*
+import com.example.myapplication.LoginScreen.Companion.globaltoken
+import com.example.myapplication.LoginScreen.Companion.globalusername
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.*
 import java.io.*
 
-class StatisticScreen : AppCompatActivity() {
+class StatisticScreen() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistic_screen)
@@ -55,8 +57,10 @@ class StatisticScreen : AppCompatActivity() {
     }
 
 
+
     fun getStatistic(){
-        val url = "http://3.67.41.247:3000/users/4"
+
+        val url = "http://18.185.157.106:3000/users/" + globalusername
 
 
         httpGet(url,
@@ -73,6 +77,8 @@ class StatisticScreen : AppCompatActivity() {
                         s_pkt.setText(pkt.toString());
 
                     }
+
+
                     Log.v("Info", "Udalo sie uzyskac punkty")
 
                 }

@@ -9,9 +9,12 @@ import android.view.*
 import android.widget.*
 import androidx.recyclerview.widget.*
 import com.google.gson.*
+import com.google.gson.internal.bind.*
+import com.google.gson.reflect.*
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.*
 import java.io.*
+
 
 class FieldScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,10 +35,11 @@ class FieldScreen : AppCompatActivity() {
         arrayList.add("Historia");
         arrayList.add("Sport");
 
-        val arrayAdapter = ArrayAdapter(this@FieldScreen, R.layout.field_row, arrayList)
+
         recyclerView_main.layoutManager = LinearLayoutManager(this)
-        recyclerView_main.adapter = MainAdapter()
-        fechtJson();
+        fechtJson()
+     //   recyclerView_main.adapter = MainAdapter()
+
     }
 
     fun configureBackButton() {
@@ -51,39 +55,49 @@ class FieldScreen : AppCompatActivity() {
 
 
     fun fechtJson(){
-        val url = "http://3.67.41.247:3000/fields"
+        val url = "http://18.185.157.106:3000/fields"
+        val request = Request.Builder()
+            .url(url)
+          //  .get()
+           .addHeader("Accept", "application/json")
+            .build()
 
         val client = OkHttpClient()
-        val FORM = "application/x-www-form-urlencoded".toMediaTypeOrNull()
-        fun httpGet(url: String, success: (response: Response)-> Unit, failure:() -> Unit){
+      //val FORM = "application/x-www-form-urlencoded".toMediaTypeOrNull()
+       // fun httpGet(url: String, success: (response: Response)-> Unit, failure:() -> Unit){
 
-            val request = Request.Builder()
-                .url(url)
-                .get()
-                .addHeader("Accept", "application/json")
-                .build()
+
             client.newCall(request).enqueue(object : Callback {
+                override fun onResponse(call: Call, response: Response) {
+                  val body = response?.body?.string()
+                    Log.v("INFO", body.toString())
+                   val gson = GsonBuilder().create()
+println(body)
+                    val recyclerView_main = findViewById<RecyclerView>(R.id.recyclerView_main);
+                    val field_list = gson.fromJson(body, Array<FieldStructure>::class.java)
+
+                    Log.v("Field_list", field_list.toString() )
+
+                     //   Log.v("Info", "Wybór kategorii udał się")
+                    runOnUiThread{
+
+
+                    //    recyclerView_main.adapter = MainAdapter(field_list = FieldStructure())
+
+                    }
+                }
+
                 override fun onFailure(call: Call, e: IOException) {
                     Log.v("Info", "Wybór kategorii nie powiódł się")
 
                 }
 
-                override fun onResponse(call: Call, response: Response) {
-                  val body = response.body?.string()
-val gson = GsonBuilder().create()
-                    val field_list = gson.fromJson(body, FieldStructure::class.java)
-                    val recyclerView_main = findViewById<RecyclerView>(R.id.recyclerView_main);
-                    runOnUiThread{
-                      recyclerView_main.adapter = MainAdapter()
-                    }
-                }
+
+
             })
         }
-    }
-
-
-
-
-
+   // }
 
 }
+
+
