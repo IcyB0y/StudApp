@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/text1"
+    android:background="@drawable/button_background"
     android:textColor="@color/white"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:layout_width="fill_parent"

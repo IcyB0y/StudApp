@@ -8,7 +8,9 @@ import android.util.*
 import android.view.*
 import android.widget.*
 import androidx.recyclerview.widget.*
+import com.example.myapplication.LoginScreen.Companion.globalUrl
 import com.google.gson.*
+import com.google.gson.annotations.*
 import com.google.gson.internal.bind.*
 import com.google.gson.reflect.*
 import okhttp3.*
@@ -27,13 +29,6 @@ class FieldScreen : AppCompatActivity() {
 
 
         val recyclerView_main = findViewById<RecyclerView>(R.id.recyclerView_main)
-
-       val arrayList = ArrayList<String>();
-
-        arrayList.add("Matematyka");
-        arrayList.add("Fizyka");
-        arrayList.add("Historia");
-        arrayList.add("Sport");
 
 
         recyclerView_main.layoutManager = LinearLayoutManager(this)
@@ -55,7 +50,7 @@ class FieldScreen : AppCompatActivity() {
 
 
     fun fechtJson(){
-        val url = "http://18.185.157.106:3000/fields"
+        val url = globalUrl + "/fields"
         val request = Request.Builder()
             .url(url)
           //  .get()
@@ -69,20 +64,27 @@ class FieldScreen : AppCompatActivity() {
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onResponse(call: Call, response: Response) {
-                  val body = response?.body?.string()
+                  val body = response.body?.string()
+
                     Log.v("INFO", body.toString())
                    val gson = GsonBuilder().create()
 println(body)
                     val recyclerView_main = findViewById<RecyclerView>(R.id.recyclerView_main);
-                    val field_list = gson.fromJson(body, Array<FieldStructure>::class.java)
+         //           val field_list = gson.fromJson(body, Array<FieldStructure>::class.java)
 
-                    Log.v("Field_list", field_list.toString() )
 
-                     //   Log.v("Info", "Wybór kategorii udał się")
+       //             val jsonData = gson.fromJson(body, Array<Field>::class.java)
+ //Log.v("przed", jsonData.toString())
+                    val jsonData2 = gson.fromJson(body, Array<Field>::class.java).toList()
+                    Log.v("po", jsonData2.toString())
+
+
+
+                        Log.v("Info", "Wybór kategorii udał się")
                     runOnUiThread{
 
 
-                    //    recyclerView_main.adapter = MainAdapter(field_list = FieldStructure())
+                      recyclerView_main.adapter = MainAdapter(jsonData2)
 
                     }
                 }
@@ -96,7 +98,9 @@ println(body)
 
             })
         }
-   // }
+
+
+    // }
 
 }
 

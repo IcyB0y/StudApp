@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.*
 import android.widget.*
+import com.example.myapplication.LoginScreen.Companion.globalUrl
 import com.example.myapplication.LoginScreen.Companion.globaltoken
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -79,7 +80,7 @@ class MainMenu : AppCompatActivity() {
         })
     }
     fun logout(){
-        val url = "http://18.185.157.106:3000/logout"
+        val url = globalUrl + "/logout"
       //  Toast.makeText(this, "Wylogowywanie", Toast.LENGTH_SHORT).show()
         val body = (url).toRequestBody(FORM)
         httpDelete(url,

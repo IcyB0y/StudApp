@@ -19,6 +19,7 @@ open class LoginScreen : AppCompatActivity() {
 companion object {
     public var globaltoken = "";
     public var globalusername = "";
+    val globalUrl = "http://18.192.176.165:3000"
 }
 
     fun httpPost(url: String, body: RequestBody, success: (response: Response)-> Unit, failure:() -> Unit){
@@ -42,7 +43,7 @@ companion object {
 
     fun login(login: String, password: String){
         Toast.makeText(this, "Logowanie (" + login + ":" + password + ")", Toast.LENGTH_SHORT).show()
-        val url = "http://18.185.157.106:3000/login"
+        val url = globalUrl + "/login"
 
 
         val body = ("session[username]=" + login + "&session[password]=" + password).toRequestBody(FORM)

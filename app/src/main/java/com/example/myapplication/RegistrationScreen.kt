@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.*
 import android.view.*
 import android.widget.*
+import com.example.myapplication.LoginScreen.Companion.globalUrl
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -71,7 +72,7 @@ class RegistrationScreen : AppCompatActivity() {
         })
     }
     fun register(username: String, password: String){
-        val url = "http://18.185.157.106:3000/users"
+        val url = globalUrl + "/users"
 
 
         val body = ("user[username]=" + username + "&user[password]=" + password).toRequestBody(FORM)

@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.util.*
 import android.view.*
 import android.widget.*
+import com.example.myapplication.AnswerAdapter.Companion.globalScore
+import com.example.myapplication.GameScreen.Companion.numberOfQuestions
+import com.example.myapplication.LoginScreen.Companion.globalUrl
 import com.example.myapplication.LoginScreen.Companion.globaltoken
 import com.example.myapplication.LoginScreen.Companion.globalusername
 import okhttp3.*
@@ -19,6 +22,9 @@ class StatisticScreen() : AppCompatActivity() {
         setContentView(R.layout.activity_statistic_screen)
         configureBackButton()
         getStatistic()
+        val s_local_pkt = findViewById<TextView>(R.id.s_local_pkt)
+
+            s_local_pkt.setText(globalScore.toString()+ "/"+numberOfQuestions.toString());
     }
 
 
@@ -60,7 +66,7 @@ class StatisticScreen() : AppCompatActivity() {
 
     fun getStatistic(){
 
-        val url = "http://18.185.157.106:3000/users/" + globalusername
+        val url = globalUrl +"/users/" + globalusername
 
 
         httpGet(url,
@@ -74,8 +80,8 @@ class StatisticScreen() : AppCompatActivity() {
                     val s_pkt = findViewById<TextView>(R.id.s_pkt)
                     this.runOnUiThread{
                         val pkt = json.getInt("last_score")
-                        s_pkt.setText(pkt.toString());
-
+                  //      s_pkt.setText(pkt.toString());
+ s_pkt.setText("...")
                     }
 
 
