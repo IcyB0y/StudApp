@@ -9,6 +9,7 @@
         android:id="@+id/textView_answer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
         android:text="Odpowiedz"
         android:textAlignment="center"
         android:textColor="@color/white"

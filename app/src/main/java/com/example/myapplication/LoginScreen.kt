@@ -19,7 +19,7 @@ open class LoginScreen : AppCompatActivity() {
 companion object {
     public var globaltoken = "";
     public var globalusername = "";
-    val globalUrl = "http://18.192.176.165:3000"
+    val globalUrl = "http://18.185.90.7:3000"
 }
 
     fun httpPost(url: String, body: RequestBody, success: (response: Response)-> Unit, failure:() -> Unit){
@@ -47,7 +47,7 @@ companion object {
 
 
         val body = ("session[username]=" + login + "&session[password]=" + password).toRequestBody(FORM)
-       // print("JSON String: (String(data: responseData, encoding: .utf8))")
+
         httpPost(url, body,
         fun(response:Response){
             Log.v("Info", "Succeeded")
@@ -95,7 +95,6 @@ companion object {
         btn_login.setOnClickListener {
           val username = login_field.text.toString()
             val password = password_field.text.toString()
-            Log.v("LoginScreen", username)
             login(username, password);
         }
 

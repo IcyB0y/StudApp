@@ -43,16 +43,9 @@ class GameScreen : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
-
-
                 val gson = GsonBuilder().create()
-                println(body)
-
 
                 question_list = gson.fromJson(body, Array<Question>::class.java).toList()
-                Log.v("QUESTIONS_po", question_list.toString())
-
-
 
                 Log.v("QUESTIONS_Info", "Pobranie pytań udało się")
                 getAnswer();
@@ -79,15 +72,9 @@ class GameScreen : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
-                Log.v("Answer_body", body.toString())
-
                 val gson = GsonBuilder().create()
-                println(body)
-
 
                 answer_list = gson.fromJson(body, Array<Answer>::class.java).toList()
-
-
 
 
                 Log.v("Answer_Info", "Pobranie odpowiedzi udało się")
@@ -104,13 +91,12 @@ class GameScreen : AppCompatActivity() {
     }
 
     fun startGame() {
-var score :Int = 0
+
 
         var filterQuestions: List<Question> = question_list.filter { it.field_id == globalId }
 
          numberOfQuestions = filterQuestions.count()
         val textView_question = findViewById<TextView>(R.id.textView_question)
-      //  val textView_answer = findViewById<TextView>(R.id.textView_answer)
         val recyclerView_answer = findViewById<RecyclerView>(R.id.recyclerView_answer);
 
         println(numberOfQuestions)
@@ -119,26 +105,20 @@ var i : Int =0
        repeat (numberOfQuestions) {
            b=i
             val question = filterQuestions.get(i)
-           Log.v("Co to questionw wgl", question.toString())
-           Log.v("answers przed filtracją", answer_list.toString())
            var filterAnswers: List<Answer> = answer_list.filter { it.question_id == question.id}
-           Log.v("answers po filtracji", filterAnswers.toString())
-           runOnUiThread{
 
+           runOnUiThread{
 
                recyclerView_answer.adapter = AnswerAdapter(filterAnswers)
 
            }
-//Log.v("Odpowiedzi", filterAnswers.toString())
-            Log.v("GAME_STARTED", i.toString())
-            Log.v("GAME_STARTED", question.question)
+
             textView_question.text = question.question
 
-            Log.v("Punkty", score.toString())
            runOnUiThread(){
            textView_question.setOnClickListener(){
                b++
-               score++
+
            }
                runOnUiThread(){
                    Handler(Looper.getMainLooper()).postDelayed({
@@ -151,7 +131,7 @@ var i : Int =0
            }
            while(b==i){println(b)}
            i++
-           score++
+
 
 
 //miejsce na update last_score

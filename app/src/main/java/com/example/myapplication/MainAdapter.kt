@@ -11,15 +11,15 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.*
 
 class MainAdapter(private val field_list: List<Field>): RecyclerView.Adapter<CustomViewHolder>() {
-    //val fieldList = listOf("kategoria1", "kategoria2")
+
     companion object {
        var globalId : Int = 0
     }
 
-    ///number OfItems
+
     override fun getItemCount(): Int{
         return field_list.count()
-        //return field_list.fields.count()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -29,12 +29,10 @@ class MainAdapter(private val field_list: List<Field>): RecyclerView.Adapter<Cus
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-//val fieldList = fieldList.get(position)
-//val field = field_list.fields.get(position)
         val field = field_list[position]
 
         Log.v("1", field_list.toString())
-     //   Log.v("2", field.toString())
+
      holder?.textView_field_title.text = field.name
 
         holder?.textView_field_title.setOnClickListener(){

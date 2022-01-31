@@ -15,10 +15,10 @@ class AnswerAdapter(private val answer_list: List<Answer>): RecyclerView.Adapter
         var globalScore : Int = 0
     }
 
-    ///number OfItems
+
     override fun getItemCount(): Int{
         return answer_list.count()
-        //return field_list.fields.count()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -28,28 +28,18 @@ class AnswerAdapter(private val answer_list: List<Answer>): RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-//val fieldList = fieldList.get(position)
-//val field = field_list.fields.get(position)
+
         val answerx = answer_list[position]
 
-       Log.v("1", answer_list.toString())
-          Log.v("2", answerx.toString())
+
     holder.textView_answer.text = answerx.answer
 
-        holder?.textView_answer.setOnClickListener(){
+        holder.textView_answer.setOnClickListener(){
            if (answerx.is_correct == true)
             globalScore = globalScore + 1
 
 
         }
-        /* holder?.textView_field_title.setOnClickListener(){
-            val context=holder.textView_field_title.context
-            val intent = Intent( context, GameScreen::class.java)
-            globalId = field.id
-            println(globalId)
-            context.startActivity(intent)
-        }
-        * */
 
     }
 

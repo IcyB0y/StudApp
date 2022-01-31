@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    android:dividerHeight="10.0dp"
 
     <TextView
         android:id="@+id/textView_field_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
         android:text="Nazwa kategorii"
         android:textAlignment="center"
         android:textColor="@color/white"

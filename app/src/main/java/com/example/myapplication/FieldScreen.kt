@@ -25,15 +25,10 @@ class FieldScreen : AppCompatActivity() {
 
         configureBackButton();
 
-
-
-
         val recyclerView_main = findViewById<RecyclerView>(R.id.recyclerView_main)
-
 
         recyclerView_main.layoutManager = LinearLayoutManager(this)
         fechtJson()
-     //   recyclerView_main.adapter = MainAdapter()
 
     }
 
@@ -53,30 +48,18 @@ class FieldScreen : AppCompatActivity() {
         val url = globalUrl + "/fields"
         val request = Request.Builder()
             .url(url)
-          //  .get()
            .addHeader("Accept", "application/json")
             .build()
 
         val client = OkHttpClient()
-      //val FORM = "application/x-www-form-urlencoded".toMediaTypeOrNull()
-       // fun httpGet(url: String, success: (response: Response)-> Unit, failure:() -> Unit){
-
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onResponse(call: Call, response: Response) {
                   val body = response.body?.string()
-
-                    Log.v("INFO", body.toString())
                    val gson = GsonBuilder().create()
-println(body)
                     val recyclerView_main = findViewById<RecyclerView>(R.id.recyclerView_main);
-         //           val field_list = gson.fromJson(body, Array<FieldStructure>::class.java)
 
-
-       //             val jsonData = gson.fromJson(body, Array<Field>::class.java)
- //Log.v("przed", jsonData.toString())
                     val jsonData2 = gson.fromJson(body, Array<Field>::class.java).toList()
-                    Log.v("po", jsonData2.toString())
 
 
 

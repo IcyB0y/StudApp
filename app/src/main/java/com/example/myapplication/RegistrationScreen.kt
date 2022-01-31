@@ -81,7 +81,6 @@ class RegistrationScreen : AppCompatActivity() {
             fun(response:Response){
                 Log.v("Info", "Succeeded")
                 val response_string = response.body?.string()
-                Log.v("INFO", response_string.toString())
                 val json = JSONObject(response_string)
               if (json.has("password")){
                     this.runOnUiThread{
